@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            <meta charset="UTF-8">
+            <meta name="description" content="codepen.io Tribute Page">
+            <meta name="keywords" content="HTML, CSS, JavaScript">
+            <meta name="author" content="Luther Calvin Riggs">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </title>
+
+        <style>
+            @import "https://fonts.googleapis.com/css?family=Lato: 400,700";
+
+            *{
+                box-sizing: border-box;
+            }
+
+            body{
+                font-family: 'Lato', sans-serif;
+                background-color: #eee;
+                padding-top: 85px;
+                
+            }
+
+            header{
+                position: fixed; 
+                top: 0;
+                left: 0;
+                right: 0;
+                padding: 10px 20px;
+                min-height: 75px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                background-color: #eee;
+            }
+
+            main{
+                margin: 50px;
+            }
+
+            .container{
+                /* Veritcal-Horizontal spacing for centering */
+                max-width: 1000px;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            nav{
+                display:flex;
+                flex-direction: row;
+                padding-right: 50px;
+            }
+
+            nav > ul{
+                width: 35vw;
+                display:flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            @media screen and (max-width: 750px){
+                nav > ul{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    text-align: center;
+                }
+            }
+
+            .logo{
+                width: 80%;
+            }
+
+            #header-img{
+                width: 350px;
+            }
+
+            li{
+                list-style: none;
+            }
+
+            h1{
+                text-align: center;
+                font-size: 2em;
+            }
+
+        @media screen and (max-width: 650px){
+            header{
+                flex-wrap: wrap;
+                /* Causes nav buttons to tuck under the logo */
+            }
+
+            body{
+                padding-top: 150px;
+            }
+
+            .logo{
+                width: 100%;
+                padding-top: 25px;
+                /* Centers the logo in the header */
+                position: relative;
+            }
+
+            nav {
+                /* Causes nav buttons to stack */
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            nav > ul{
+                display:flex;
+                flex-direction: column;
+                justify-content: space-around;
+            }
+
+            .logo{
+                text-align: center;
+            }
+
+            #header-img{
+                width: 350px;
+                text-align:center;
+            }
+
+            .feature-block{
+                margin-top: 20px;
+            }
+        }
+
+        .email-collection{
+            text-align: center;
+        }
+
+        #email{
+            max-width: 350px;
+            width: 100%;
+            height: 30px;
+            font-size: 15px;
+            padding-left: 5px;
+        }
+
+        #submit{
+            color: black;
+            background-color: rgb(92.5%, 71.1%, 10%);
+            font-size: 1em;
+            font-weight: 700;
+            padding: 5px 30px;
+            margin: 20px;
+            text-transform: uppercase;
+            border: 0;
+            border-radius: 2px;
+            /* background: transparent; */
+            cursor: pointer;
+        }
+
+        #submit:hover{
+            background-color: orange;
+            transition: background-color 1s;
+        }
+
+        #features{
+            margin-top: 30px;
+        }
+
+        .feature-block{
+            display: flex;
+        }
+
+        .icon{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+            width: 125px;
+        }
+
+        @media screen and (max-width: 550px){
+            .icon{
+                display: none;
+            }
+
+            .description{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        #how-it-works{
+            display:flex;
+            justify-content: center;
+            margin-top: 100px;
+        }
+
+        iframe{
+            max-width: 560px;
+            width:100%;
+        }
+
+        #pricing{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 100px;
+        }
+
+        .instrument{
+            border: 1px solid black;
+            border-radius: 3px;
+            width: calc(100% / 3);
+            margin: 10px;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        h3{
+            text-transform: uppercase;
+            font-size: 1.4em;
+            color: black;
+            background-color: #ddd;
+            line-height: 50px;
+            width: 100%;
+            margin: 0; /* Positions at top of parent */
+        }
+
+        h4{
+            font-size: 1.6em;
+            margin-top: 20px;
+        }
+
+        #instr-feature{
+            margin: 15px 0;     
+        }
+
+        #instr-feature > ol{
+            text-align: center;
+        }
+
+        #instr-feature > li{
+            display: flex;
+            justify-content: flex-start;
+            font-size: 1.2em;
+            padding: 5px 0;
+        }
+
+        @media screen and (max-width: 800px){
+            #pricing{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .instrument{
+                width: 300px;
+            }
+        }
+
+        #select-button{
+            color: black;
+            background-color: rgb(92.5%, 71.1%, 10%);
+            font-size: 1em;
+            font-weight: 200;
+            padding: 10px 30px;
+            margin: 20px;
+            text-transform: uppercase;
+            border: 0;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        #select-button:hover{
+            background-color: orange;
+            transition: background-color 1s;
+        }
+
+        footer{
+            background-color: #ccc;
+            padding: 10px 30px;
+            margin-top: 50px;
+        }
+
+        footer > ul{
+            display:flex;
+            justify-content: flex-end;
+        }
+
+        footer > ul > li{
+            padding: 0 10px;
+            font-size: 1.2em;
+        }
+
+        span{
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 10px;
+        }
+        </style>
+    </head>
+
+    <body>
+        <header id="header">
+            <div class="logo">
+                <img id="header-img" src="https://s3.amazonaws.com/freecodecamp/original_trombones.png" alt="original trombones logo">
+            </div>
+            <nav id="nav-bar">
+                <ul>
+                    <li>
+                        <a class="nav-link" href="#features" style="text-decoration:none;">Features</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#how-it-works" style="text-decoration:none;">How It Works</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#pricing" style="text-decoration:none;">Pricing</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+            
+        <main>
+            <form id="form" class="email-collection" action="https://www.freecodecamp.com/email-submit">
+                <h1>Handcrafted, home-made masterpieces</h1>
+                <input id="email" type="email" name="email" placeholder="Enter your email address" required>
+                <br>
+                <input id="submit" type="submit" class="button" value="Get Started"></input>
+            </form>
+
+            <div class="container">
+                <section id="features">
+                    <div class="feature-block">
+                        <div class="icon">
+                            <img src="" alt="premium materials image">
+                        </div>
+                        <div class="description">
+                            <h2>Premium Materials</h2>
+                            <p>Our trombones use the shiniest brass which is sourced locally. This will increase the longevity of your purchase.</p>
+                        </div>
+                    </div>
+                    <div class="feature-block">
+                        <div class="icon">
+                            <img src="" alt="fast shipping image">
+                        </div>
+                        <div class="description">
+                            <h2>Fast Shipping</h2>
+                            <p>We make sure you recieve your tombone as soon as we've finished making it. We also provide free returns if you are not satisfied.</p>
+                        </div>
+                    </div>
+                    <div class="feature-block">
+                        <div class="icon">
+                            <img src="" alt="quality assurance image">
+                        </div>
+                        <div class="description">
+                            <h2>Quality Assurance</h2>
+                            <p>For every purchase you make, we will ensure there are no damages or faults and we will check and test the pitch of your instrument.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="how-it-works">
+                    <iframe id="video" height="315" src="https://www.youtube-nocookie.com/embed/y8Yv4pnO7qc?rel=0&controls=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
+                </section>
+
+                <section id="pricing">
+                    <div class="instrument" id="tenor">
+                        <h3>Tenor Trombone</h3>
+                        <h4 id="price">$600</h4>
+                        <ol id="instr-feature">
+                            <li>Lorem ipsum.</li>
+                            <li>Lorem ipsum.</li>
+                            <li>Lorem ipsum dolor.</li>
+                            <li>Lorem ipsum.</li>
+                        </ol>
+                        <button id="select-button" type="button" class="button">select</button>
+                    </div>
+
+                    <div class="instrument" id="bass">
+                        <h3>BASS TROMBONE</h3>
+                        <h4 id="price">$900</h4>
+                        <ol id="instr-feature">
+                            <li>Lorem ipsum.</li>
+                            <li>Lorem ipsum.</li>
+                            <li>Lorem ipsum dolor.</li>
+                            <li>Lorem ipsum.</li>
+                        </ol>
+                        <button id="select-button" type="button" class="button">select</button>
+                    </div>
+
+                    <div class="instrument" id="valve">
+                        <h3>VALVE TROMBONE</h3>
+                        <h4 id="price">$1200</h4>
+                        <ol id="instr-feature">
+                            <li>Plays similar to a Trumpet.</li>
+                            <li>Great for Jazz Bands.</li>
+                            <li>Lorem ipsum dolor.</li>
+                            <li>Lorem ipsum.</li>
+                        </ol>
+                        <button id="select-button" type="button" class="button">select</button>
+                    </div>
+                </section>
+
+                <footer>
+                        <ul>
+                            <li>
+                                <a href="#" style="text-decoration:none;">Privacy</a>
+                            </li>
+                            <li>
+                                <a href="#" style="text-decoration:none;">Terms</a>
+                            </li>
+                            <li>
+                                <a href="#" style="text-decoration:none;">Contact</a>
+                            </li>
+                        </ul>
+                    <span>Copyright 2016, Original Trombones</span>
+                </footer>
+
+            </div>
+        </main>
+    </body>
+</html>

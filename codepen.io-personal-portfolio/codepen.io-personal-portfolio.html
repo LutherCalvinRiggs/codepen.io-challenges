@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Codepen.io Personal Portfolio Page Challenge</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="codepen.io Personal Portfolio Page">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <meta name="author" content="Luther Calvin Riggs">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            /* Custom colors specified */
+            :root{
+                --main-white: #f0f0f0;
+                --main-red: #be3144;
+                --main-blue: #45567d;
+                --main-gray: #303841;
+            }
+
+            * {
+                /* Makes the area cover the entire viewport */
+                /* Also resets each new section to maximum coverage */
+                margin: 0;
+                padding: 0;
+                box-sizing:border-box;
+            }
+
+            body{
+                font-family: 'Poppins', sans-serif;
+                font-size: 1.8rem; /* 18px */
+                font-weight: 400;
+                line-height: 1.4;
+                color: var(--main-white);
+            }
+
+            h1, h2{
+                font-family: 'Raleway', sans-serif;
+                font-weight: 700;
+                text-align: center;
+            }
+
+            ul{
+                list-style: none;
+            }
+
+            a{
+                text-decoration: none;
+                color: var(--main-white);
+            }
+
+            #navbar{
+                display: flex;
+                justify-content: flex-end;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background-color: var(--main-red);
+                padding-right: 20px;
+                z-index: 10;
+            }
+
+            #nav-list{
+                display: flex;
+                margin-right: 2rem;
+            }
+
+            @media screen and (max-width: 575px){
+                #navbar{
+                    justify-content: center;
+                }
+                #nav-list{
+                    margin: 0 1rem;
+                }
+            }
+
+            #nav-list a{
+                display: block;
+                font-size: 30px;
+                padding: 1.2rem;
+            }
+
+            #nav-list a:hover{
+                background: var(--main-blue);
+            }
+
+            #welcome-section{
+                background: linear-gradient(45deg, #363636, #0c0d0b);
+                width: 100%;
+                height: 100vh;
+                /* Easiest way to center something */ 
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            h1{
+                font-size: 4rem;
+            }
+
+            #welcome-section p{
+                color: var(--main-red);
+                font-weight: 200;
+                font-style: italic;
+            }
+
+            #projects{
+                background: var(--main-blue);
+                text-align: center;
+                padding: 5rem 0;
+            }
+
+            #project-section h2{
+                width: 100%;
+                max-width: 800px;
+                font-size: 3rem;
+                border-bottom: 3px solid var(--main-white);
+                margin: 50px auto 4rem auto;
+                padding: 0 1rem;
+            }
+
+            @media screen and (max-width:775px){
+                #project-section h2{
+                    font-size: 2.5rem;
+                }
+            }
+
+            @media screen and (max-width:650px){
+                #project-section h2{
+                    font-size: 1.8rem;
+                }
+            }
+            
+            .projects-grid{
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                grid-gap: 4rem;
+                width: 100%;
+                max-width: 1280px;
+                margin: 0 auto;
+                /* margin-bottom to leave space for the show-all button */
+                margin-bottom: 6rem;
+            }
+
+            /* @media screen and (max-widht: ;){
+                .projects-grid{
+
+                }
+            } */
+
+            .project{
+                /* This is the background space that is colored gray */
+                background:var(--main-gray);
+                border-radius: 2px;
+                height: 100%;
+            }
+
+            .project-image{
+                /* This image sits on top of the gray colored space */
+                width: 100%;
+                /* This makes the height of the image smaller than the height of the .project (the gray area underneath it). The Xrem is simply increased until the text fits into the space. */
+                height: calc(100% - 3.8rem);
+                /* Makes the image fit the specified size of the container without stretching. Disregard overflow. */
+                object-fit: cover;
+            }
+
+            .code{
+                color: var(--main-gray);
+                transition: color 0.3s ease-out;
+            }
+
+            .project:hover .code{
+                color: orange;
+            }
+            
+            .btn{
+                display: inline-block;
+                padding: 1rem 2rem;
+                border-radius: 2px;
+            }
+
+            .btn-show-all{
+                font-size: 2rem;
+                background: var(--main-gray);
+                transition: background .3s ease-out;
+            }
+
+            .btn-show-all:hover{
+                background: var(--main-red);
+                transform: translate(2px);
+            }
+
+            .btn-show-all i{
+                margin-left: 10px;
+                transform: translate(0);
+                transition: transform 0.5s ease-out;
+            }
+
+            /* .btn::after{
+                content: ">";
+            } */
+
+            #contact{
+                background-color: var(--main-gray);
+                width: 100%;
+                height: 400px;
+                /* Easiest way to center something */ 
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding-top: 50px;
+                border-bottom: 5px solid var(--main-red);
+            }
+
+            #contact h2{
+                font-size: 3rem;
+            }
+
+            #contact p{
+                color: var(--main-white);
+                font-weight: 200;
+                font-style: italic;
+            }
+
+            #contact ul{
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                width: 100%;
+                padding: 20px 0;
+            }
+
+            #contact li{
+                display: inline-block;
+                padding: 2rem 4rem;
+            }
+
+            .social-link{
+                /* transform: translateY(0); */
+                transition: transform 0.5s ease-out;
+            }
+
+            .social-link:hover{
+                transform: translateY(15px);
+                /* transition: transform 0.5s ease-out; */
+            }
+
+            footer{
+                background: var(--main-gray);
+                display: flex;
+                justify-content: space-evenly;
+                /* vertical-align: middle; */
+                font-size: .8em;
+                font-weight: 200;
+            }
+
+            footer p{
+                margin: 1.4rem;
+            }
+
+            @media screen and (max-width: 1200px){
+                .contact li{
+                    padding: 1rem 2rem;
+                }
+            }
+
+            @media screen and (max-width: 700px){
+                #contact{
+                    height: 750px;
+                }
+
+                #contact ul{
+                    flex-direction: column;
+                    
+                    text-align: center;
+                }
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <nav id="navbar">
+            <ul id="nav-list">
+                <li>
+                    <a href="#welcome-section">About</a>
+                </li>
+                <li>
+                    <a href="#project-section">Work</a>
+                </li>
+                <li>
+                    <a href="#contact">Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+        <section id="projects">
+            <section id="welcome-section">
+                    <h1>Hey I am Luther</h1>
+                    <p>a web developer</p>
+            </section>
+            
+            <div id="project-section">
+                <h2>These are some of my projects</h2>
+
+                <div class="projects-grid">
+                    <div class="project">
+                        <a href="https://codepen.io/freeCodeCamp/full/zNqgVx" target="_blank" class="project project-tile">
+                            <img class="project-image" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/images/tribute.jpg" atl="project">
+                            <p class="project-tile">
+                                <span class="code"><</span>
+                                " Tribute Page "
+                                <span class="code">/></span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="project">
+                        <a href="https://codepen.io/freeCodeCamp/full/qRZeGZ" target="_blank" class="project project-tile">
+                            <img class="project-image" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/images/random-quote-machine.png" atl="project">
+                            <p class="project-tile">
+                                <span class="code"><</span>
+                                " Tribute Page "
+                                <span class="code">/></span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="project">
+                        <a href="https://codepen.io/freeCodeCamp/full/wgGVVX" target="_blank" class="project project-tile">
+                            <img class="project-image" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/images/calc.png" atl="project">
+                            <p class="project-tile">
+                                <span class="code"><</span>
+                                Tribute Page
+                                <span class="code">/></span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="project">
+                        <a href="https://codepen.io/freeCodeCamp/full/mVEJag" target="_blank" class="project project-tile">
+                            <img class="project-image" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/images/map.jpg" atl="project">
+                            <p class="project-tile">
+                                <span class="code"><</span>
+                                " Tribute Page "
+                                <span class="code">/></span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="project">
+                        <a href="https://codepen.io/freeCodeCamp/full/wGqEga" target="_blank" class="project project-tile">
+                            <img class="project-image" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/images/wiki.png" atl="project">
+                            <p class="project-tile">
+                                <span class="code"><</span>
+                                " Tribute Page "
+                                <span class="code">/></span>
+                            </p>
+                        </a>
+                    </div>
+
+                    <div class="project">
+                        <a href="https://codepen.io/freeCodeCamp/full/KzXQgy" target="_blank" class="project project-tile">
+                            <img class="project-image" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/images/tic-tac-toe.png" atl="project">
+                            <p class="project-tile">
+                                <span class="code"><</span>
+                                " Tribute Page "
+                                <span class="code">/></span>
+                            </p>
+                        </a>
+                    </div>
+                </div>
+
+                <a class="btn btn-show-all" target="_blank" href="https://codepen.io/FreeCodeCamp/">
+                    Show all
+                    <!-- <i class="fas fa-chevron=right">
+                        ::before
+                    </i> -->
+                </a>
+            </div>
+
+        </section>
+
+        <section id="contact">
+            <h2>Let's work together...</h2>
+            <p>How do you take your coffee?</p>
+            <ul>
+                <li>
+                    <a id="facebook-link" class="social-link" target="_blank" href="#">Facebook</a>
+                </li>
+                <li>
+                    <a id="profile-link" class="social-link" target="_blank" href="https://github.com/LutherCalvinRiggs">GitHub</a>
+                </li>
+                <li>
+                    <a id="twitter-link" class="social-link" target="_blank" href="#">Twitter</a>
+                </li>
+                <li>
+                    <a id="send-email-link" class="social-link" target="_blank" href="#">Send a email</a>
+                </li>
+                <li>
+                    <a id="call-me-link" class="social-link" target="_blank" href="#">Call me</a>
+                </li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>**This is just a fake portfolio. All the projects and contact details given are not real.</p>
+            <p>
+                <a href="https://www.freecodecamp.com/" target="_blank">Created for freeCodeCamp</a>
+            </p>
+        </footer>
+
+        <footer>
+            
+        </footer>
+    </body>
+</html>
